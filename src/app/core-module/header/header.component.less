@@ -1,0 +1,97 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+}
+
+header{
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    
+    .info-bar{
+        background-color:black;
+        height: 100px;  
+    }
+    .shopping-bar{
+        text-transform: uppercase;  
+        color: white;
+        height: 50px;
+        background-color: black;
+        border-top: 2px solid white;
+        border-bottom: 2px solid white;
+        .categories{
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;                
+            a{
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+                padding: 10px;
+            }
+            a:hover{
+                color:black;
+                background-color: white;
+                cursor: pointer;
+            }
+            .router-link-active{
+                color:black;
+                background-color: white;
+            }
+        }
+    }
+}
+
+.logo{
+    img{
+    margin: 10px;
+    height: 80px;
+    border: 2px solid white;
+    }
+}
+
+.items{
+    flex-wrap: wrap;    
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+    font-weight: 400;
+    .item{
+        padding: 10px;    
+        font-weight: 400;   
+        text-transform: uppercase;  
+    }
+    .nav-spacer{
+        width: 2px;
+        height: 15px;
+        justify-content: center;
+        position: relative;
+        background-color: white;
+    
+    }
+    .align-justify{
+        font-size:25px; 
+        display: none;
+        padding: 10px;       
+    }
+}
+@media only screen and (max-width: 640px) {
+    .items{
+        justify-content: flex-end;
+        .item{
+            padding: 10px;
+            font-size:25px;
+        }
+        .nav-spacer, a{
+            display: none;
+        }
+        i{
+            size:100px;
+        }
+        .align-justify{
+            display: flex;
+        }
+    }
+}

@@ -1,0 +1,54 @@
+<div class="list-wrapper container">
+  <app-sidebar></app-sidebar>
+  <div class="column">
+    <div>
+      <div class=filter-bar-wrapper>
+        <div class="filter-results" id="filter-item">
+          {{products.length}} products
+        </div>
+        <div class="sort-products" id="filter-item">
+          <a sortable-table (sorted)="onSorted($event)" class="sort-by">sort by:</a>
+          <a sorting="name" id="name"> name </a>
+          <span class=divider></span>
+          <a sorting="price" id="price"> price</a>
+          <span class=divider></span>
+          <a sorting="id" id="recent"> recent</a>
+        </div>
+      </div>
+    </div>
+    <div class="items-list">
+      <div *ngFor="let product of products" class=" item ">
+        <div class="item-image ">
+          <img src="../../../assets/img/{{product.id}}.jpg ">
+        </div>
+        <div class="item-detail ">
+          <div class="description ">
+            <a href="# ">
+              <p>{{product.name}}</p>
+            </a>
+            <a href="# ">
+                      <span>{{product.category}}</span>
+                </a>
+            <div class="price-container ">
+              <span>${{product.price}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-info ">
+          <div class="buttons-wrapper ">
+            <a class="btn btn-danger ">Add to cart</a>
+            <a (click)="goToDetails(product) " class="btn btn-info ">More info</a>
+          </div>
+          <div>
+            <div class="rating ">
+              <span> Rating </span>
+              <div class="rating-stars ">
+                <app-rating [declaredRating]="declaredRating "> </app-rating>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

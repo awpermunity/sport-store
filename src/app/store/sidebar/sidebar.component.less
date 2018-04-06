@@ -1,0 +1,118 @@
+nav{
+    // display: flex;
+    // justify-content: center;
+    width: 250px;
+    background-color: #f2f2f2;
+    #nav-item{
+        border-bottom: 1px solid black;
+        padding: 10px;
+    }
+}
+
+.selected {
+    color: red;
+  }
+
+.dropDownContainer{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    border-bottom: 2px solid white; 
+}
+
+.dropHeader{
+    width: 100%;
+    display: flex;    
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.arrowInCircle{
+    pointer-events: none;    
+    border-radius: 50%;
+	width: 20px;
+    height: 20px; 
+    background-color: LightGray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-text{
+    pointer-events: none;    
+    color: black;
+    font-family: 'Roboto', sans-serif;    
+    font-size: 14px; 
+    text-transform: uppercase;
+}
+
+.drop-down{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.drop-down-menu{
+    z-index: 0;
+    align-items: center;    
+    margin-top:18px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    justify-content: 'center';
+    background: white;
+    border: 1px solid #cccccc    ;
+}
+
+.item{
+    margin:10px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: flex-start;    
+    width: 200px;
+    border-bottom: 1px solid   #e6e6e6;
+    cursor: pointer;   
+    z-index: 10;   
+}
+
+.item-txt{
+    font-family: 'Roboto', sans-serif; 
+    pointer-events: none;
+}
+
+
+.circle {
+    pointer-events: none;
+	border-radius: 50%;
+	width: 15px;
+    height: 15px; 
+    background-color: #e6e6e6;
+    margin:10px;
+    z-index:0;
+    border: 2px solid #fff;        
+}
+
+.circle.selected{
+    box-shadow: 0 0 0 1px black;
+    background-color: black;
+}
+
+.slider-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.slider{
+    padding:30px 25px 20px 25px;
+    margin-top:20px;
+}
+
+.slider-txt p{
+    justify-content: center;    
+    text-align: left;
+    pointer-events: none;    
+    color: black;
+    font-family: 'Roboto', sans-serif;    
+    font-size: 20px; 
+}

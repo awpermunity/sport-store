@@ -1,0 +1,34 @@
+<nav>
+  <div id="nav-item" class="nav-text">
+    <h5>your choice</h5>
+  </div>
+  <div id="nav-item" class='dropDownContainer' *ngFor="let type of objectKeys(filters) ; index as i;">
+    <div class='dropHeader' id={{type}} (click)="displayFilterDropdown($event)">
+      <div class='nav-text'>
+        {{type}}
+      </div>
+      <div class='arrowInCircle'>
+        <i class="fa fa-angle-up"></i>
+      </div>
+    </div>
+    <div class="drop-down" *ngIf="checkIfElementIsAlreadyInArray(type,displayedFiltersDropdowns)">
+      <div class="drop-down-menu">
+        <div *ngFor="let product of filters[type]; index as i;" class='item' id='{{product}}' (click)="selectDropdownValue($event)">
+          <div class='circle' [class.selected]="checkIfElementIsAlreadyInArray(product,selectedDropDownsValues)">
+          </div>
+          <div class='item-txt'>
+            {{product}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="nav-item" class="slider-wrapper">
+    <div class="nav-text">
+      price
+    </div>
+    <div class="slider">
+      <nouislider [config]="sliderConfig" [(ngModel)]="someRange" (change)="triggerUpdate($event)"></nouislider>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,3 @@
+<div class="icon" *ngFor="let s of maxItem">
+  <i [ngClass]="s <= this.ratedCount ? 'filled' :''" class="fa fa-star" (click)="toggleRating(s)"></i>
+</div>
