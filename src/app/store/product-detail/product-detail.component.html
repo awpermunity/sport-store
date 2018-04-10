@@ -1,4 +1,44 @@
-<p>
-  product-detail works!
-</p>
-{{product.id}}
+<div class="container">
+  <div class="item-wrapper">
+    <div class=" item ">
+      <div class="item-image ">
+        <img src="../../../assets/img/{{product.id}}.jpg ">
+      </div>
+      <div class="order-info">
+        <div class="description ">
+          <a href="# ">
+            <p>{{product.name}}</p>
+          </a>
+          <a href="# ">
+           <span>{{product.category}}</span>
+           </a>
+          <div class="price-container ">
+            <span>${{product.price}}</span>
+          </div>
+        </div>
+        <div class="item-info ">
+          <div class="buttons-wrapper ">
+            <a href="#" class="btn btn-info btn-lg">
+                  <i class="fa fa-cart-arrow-down"></i>
+                  Add to Cart
+              </a>
+          </div>
+          <div>
+          </div>
+          <div class="rating ">
+            <span> Rating </span>
+            <div class="rating-stars ">
+              <app-rating [declaredRating]="declaredRating "> </app-rating>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="details">
+    <h3>
+      Product details
+    </h3>
+    {{product.description}}
+  </div>
+</div>

@@ -1,10 +1,18 @@
 <div class="list-wrapper container">
-  <app-sidebar></app-sidebar>
+  <app-sidebar [products]="products" (checkedFilters)="makeFiltring($event)"> </app-sidebar>
   <div class="column">
     <div>
       <div class=filter-bar-wrapper>
         <div class="filter-results" id="filter-item">
-          {{products.length}} products
+          <div class="products-length">
+            {{products.length}}
+          </div>
+          <div *ngIf="products.length>1; else product">
+            Products
+          </div>
+          <ng-template #product>
+            Product
+          </ng-template>
         </div>
         <div class="sort-products" id="filter-item">
           <a sortable-table (sorted)="onSorted($event)" class="sort-by">sort by:</a>

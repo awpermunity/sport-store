@@ -1,3 +1,7 @@
+*{
+    text-transform: uppercase;
+}
+
 nav{
     // display: flex;
     // justify-content: center;
@@ -7,6 +11,21 @@ nav{
         border-bottom: 1px solid black;
         padding: 10px;
     }
+}
+.checked-filters{
+    display: flex;
+.checked-filter{
+display: flex;
+margin-top:5px;
+padding:5px;
+border: 1px solid black;
+
+.remove{
+    margin-left:5px;
+    cursor: pointer;
+}
+
+}
 }
 
 .selected {
@@ -40,8 +59,7 @@ nav{
     justify-content: center;
 }
 
-.nav-text{
-    pointer-events: none;    
+.nav-choice{
     color: black;
     font-family: 'Roboto', sans-serif;    
     font-size: 14px; 
@@ -80,14 +98,15 @@ nav{
 .item-txt{
     font-family: 'Roboto', sans-serif; 
     pointer-events: none;
+    font-size: 12px;
 }
 
 
 .circle {
     pointer-events: none;
 	border-radius: 50%;
-	width: 15px;
-    height: 15px; 
+	width: 12px;
+    height: 12px; 
     background-color: #e6e6e6;
     margin:10px;
     z-index:0;

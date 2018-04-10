@@ -13,6 +13,8 @@ export class ProductsListComponent implements OnInit {
   declaredRating: number;
   products: any[];
   sortedProducts: Product[];
+  checkedFilters: any;
+  sortingCriteria: ProductSortCriteria = { sortBy: 'id', sortDirection: 'asc' };
 
 
   constructor(
@@ -23,18 +25,55 @@ export class ProductsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getProducts({ sortBy: 'id', sortDirection: 'asc' });
+    this.getProducts();
   }
 
-  getProducts(criteria: ProductSortCriteria): void {
-    this.storeService.getProducts().subscribe(products => this.products = this.sortProducts(products, criteria));
+  getProducts(): void {
+    this.storeService.getProducts().subscribe(products => this.products = this.manageProducts(products));
   }
 
   onSorted($event) {
-    this.getProducts($event);
+    this.sortingCriteria = $event;
+    this.getProducts();
   }
 
-  sortProducts(products, criteria) {
+  manageProducts(products) {
+    if (this.checkedFilters && this.checkedFilters.details) {
+      console.log('filterProducts', this.checkedFilters.details)
+      products = this.filterProducts(products)
+    }
+    products = this.sortProducts(products)
+    return products;
+  }
+
+  makeFiltring(checkedFilters) {
+    this.checkedFilters = checkedFilters;
+    this.getProducts()
+  }
+
+  filterProducts(products) {
+    const productsList = Object.values(products);
+    return productsList.filter(product => this.filterProduct(product));
+  }
+
+  filterProduct(product) {
+    const productDetails = Object.values(product.details)
+    const mergedProductDetails = [];
+    productDetails.forEach(detail => mergedProductDetails.push(detail));
+    return this.compareProductDetailsWithFilters(mergedProductDetails, product)
+  }
+
+  compareProductDetailsWithFilters(productDetails, product) {
+    return this.checkedFilters.details.every(filter => productDetails.indexOf(filter) > -1) && this.comparePrice(product.price)
+  }
+
+  comparePrice(price) {
+    return price >= this.checkedFilters.price[0] && price <= this.checkedFilters.price[1]
+  }
+
+
+  sortProducts(products) {
+    const criteria = this.sortingCriteria;
     return products.sort((a, b) => {
       if (criteria.sortDirection === 'desc') {
         return a[criteria.sortBy] < b[criteria.sortBy] ? 1 : -1;

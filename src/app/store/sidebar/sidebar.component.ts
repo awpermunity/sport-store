@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { StoreService } from '../../store.service';
 import { Product } from '../../model/product.model';
 import { NouiFormatter } from "ng2-nouislider";
+import { Utils } from '../../model/utils';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,29 +11,65 @@ import { NouiFormatter } from "ng2-nouislider";
 })
 export class SidebarComponent implements OnInit {
 
+  @Input() products: Array<any>;
+  @Output() checkedFilters: EventEmitter<any> = new EventEmitter();
+
   private sliderConfig: any = {
+    unencoded: true,
     connect: true,
     tooltips: [new MyFormatter, new MyFormatter],
-    start: [0, 100],
+    start: [0, 5000],
     step: 1,
     range: {
       min: 0,
-      max: 100
+      max: 5000
     }
   }
 
   private displayedFiltersDropdowns: Array<any> = [];
   private selectedDropDownsValues: Array<any> = [];
-  products: Product[];
-  filters = {
-    products: ['football', 'fitness', 'rugby', 'running', 'acessories'],
-    size: ['xs', 's', 'm', 'l', 'xl']
-  }
+  private filters: Object;
+  private priceFromSlider: Array<any> = [0, 5000];
+
   triggerUpdate(event) {
-    console.log('event', event)
+    this.priceFromSlider = event;
+    this.emitFilters();
   }
 
-  ngAfterViewInit() {
+  ngOnChanges() {
+    this.filters = this.getFiltersFromGivenProducts();
+  }
+
+  getFiltersFromGivenProducts() {
+    let obj = {};
+    let keys = [];
+    this.products.forEach(product => {
+      keys.push(Object.keys(product.details))
+    });
+    const merge = Utils.merge(keys);
+    const keysWithoutDuplicates = Utils.removeDuplicates(merge)
+    console.log(keysWithoutDuplicates)
+
+    keysWithoutDuplicates.forEach(key => {
+      obj[key] = [];
+    })
+
+    keysWithoutDuplicates.forEach(key => {
+      const keyValues = [];
+      this.products.forEach(product => {
+        if (product.details[key]) {
+          keyValues.push(product.details[key])
+        }
+      });
+      obj[key] = Utils.removeDuplicates(keyValues);
+    });
+    return obj;
+  }
+
+  emitFilters() {
+    this.checkedFilters['details'] = this.selectedDropDownsValues;
+    this.checkedFilters['price'] = this.priceFromSlider;
+    this.checkedFilters.emit(this.checkedFilters);
   }
 
   constructor(
@@ -41,16 +78,15 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.getProducts();
   }
 
   objectKeys(object) {
     return Object.keys(object)
   }
-
-  // getProducts(): void {
-  //   this.storeService.getProducts().subscribe(products => this.products = products);
-  // }
+  removeItem(event) {
+    this.selectedDropDownsValues = this.selectedDropDownsValues.filter(value => value !== event);
+    this.emitFilters()
+  }
 
   displayFilterDropdown(event) {
     const filter = event.target.id;
@@ -61,6 +97,7 @@ export class SidebarComponent implements OnInit {
   selectDropdownValue(event) {
     const value = event.target.id;
     this.selectedDropDownsValues = this.onSelect(value, this.selectedDropDownsValues)
+    this.emitFilters()
   }
 
   onSelect(element, array) {
@@ -80,6 +117,7 @@ export class SidebarComponent implements OnInit {
 
   addToSelectedFilters(inputElement, array) {
     array.push(inputElement);
+    console.log('selectedDropDownsValues', this.selectedDropDownsValues);
     return array;
   }
 
@@ -87,7 +125,7 @@ export class SidebarComponent implements OnInit {
 
 export class MyFormatter implements NouiFormatter {
   to(value: number): string {
-    let output = value + " $";
+    let output = Math.floor(value) + " $";
     return output;
   }
   from(value: string): number {
