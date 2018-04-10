@@ -12,12 +12,14 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { SortingComponent } from './products-list/sorting/sorting.component';
 import { SortService } from './products-list/sorting/sort.service';
 import { SortableTableDirective } from './products-list/sorting/sorting-table.directive';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 @NgModule({
   imports: [
     CommonModule,
     AngularFontAwesomeModule,
-    NouisliderModule
+    NouisliderModule,
+    NgxGalleryModule
   ],
   declarations: [
     ProductsListComponent,
