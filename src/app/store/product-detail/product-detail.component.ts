@@ -14,11 +14,10 @@ import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gal
 })
 export class ProductDetailComponent {
   galleryOptions: NgxGalleryOptions[];
-  galleryImages: NgxGalleryImage[];
+  galleryImages: NgxGalleryImage[] = [];
   declaredRating: number;
+  product: Product;
 
-
-  @Input() product: Product;
   constructor(
     private storeService: StoreService,
     private route: ActivatedRoute,
@@ -28,6 +27,24 @@ export class ProductDetailComponent {
   }
 
   ngOnInit() {
+    this.getProduct();
+  }
+
+  ngOnChanges() {
+  }
+  getProduct() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.storeService.getProduct(id)
+      .subscribe(product => {
+        this.product = product;
+        this.setGalleryConfig();
+      });
+  }
+  goBack(): void {
+    this.location.back();
+  }
+
+  setGalleryConfig() {
     this.galleryOptions = [
       {
         width: '400px',
@@ -37,53 +54,42 @@ export class ProductDetailComponent {
       },
       // max-width 800
       {
-        breakpoint: 800,
-        width: '100%',
-        height: '600px',
-        imagePercent: 80,
+        breakpoint: 1024,
+        width: '330px',
+        height: '400px',
+        imagePercent: 100,
         thumbnailsPercent: 20,
         thumbnailsMargin: 20,
         thumbnailMargin: 20
       },
       // max-width 500
       {
-        breakpoint: 400,
-        preview: false
+        breakpoint: 500,
+        width: '330px',
+        height: '400px',
+        preview: false,
+        thumbnailsPercent: 20,
       }
     ];
-
-    this.galleryImages = [
-      {
-        small: '../../../assets/img/1.jpg',
-        medium: '../../../assets/img/1.jpg',
-        big: '../../../assets/img/1.jpg'
-      },
-      {
-        small: '../../../assets/img/2.jpg',
-        medium: '../../../assets/img/2.jpg',
-        big: '../../../assets/img/2.jpg'
-      },
-      {
-        small: '../../../assets/img/3.jpg',
-        medium: '../../../assets/img/3.jpg',
-        big: '../../../assets/img/3.jpg'
-      },
-      {
-        small: '../../../assets/img/4.jpg',
-        medium: '../../../assets/img/4.jpg',
-        big: '../../../assets/img/4.jpg'
-      }
-    ];
-    this.getProduct();
+    this.setGalleryImages();
   }
 
-  getProduct() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.storeService.getProduct(id)
-      .subscribe(product => this.product = product);
-  }
-  goBack(): void {
-    this.location.back();
+  setGalleryImages() {
+    const imgPath = "../../../assets/img/products/";
+    let productId = this.product.id;
+    const jpg = ".jpg";
+    for (let i = 0; i < this.product.numberOfImages; i++) {
+      let nextImg = i / 10;
+      let imgProductId = nextImg === 0 ? productId : productId + nextImg;
+      let fullPath = imgPath + imgProductId + jpg;
+      let galleryImage =
+        {
+          small: fullPath,
+          medium: fullPath,
+          big: fullPath
+        }
+      this.galleryImages.push(galleryImage);
+    }
   }
 
 }

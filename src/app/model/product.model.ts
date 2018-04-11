@@ -8,4 +8,6 @@ export interface Product {
         size?: string;
     }
     description: string;
+    numberOfImages: number;
+    quantity: number;
 }

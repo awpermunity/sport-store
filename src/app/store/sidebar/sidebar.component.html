@@ -1,53 +1,55 @@
-<nav>
-  <div id="nav-item" class="nav-choice">
-    <div>
-      <h5>your choice</h5>
-      <div class="checked-filters" *ngFor="let checkedFilter of selectedDropDownsValues">
-        <div class="checked-filter">
-          <div>
-            {{checkedFilter}}
-          </div>
-          <div class="remove">
-            <i class="fa fa-remove" style="font-size:15px" (click)="removeItem(checkedFilter)"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="nav-item" class="slider-wrapper">
-    <div class="nav-text">
-      price
-    </div>
-    <div class="slider">
-      <nouislider [config]="sliderConfig" [(ngModel)]="someRange" (change)="triggerUpdate($event)"></nouislider>
-    </div>
-  </div>
-  <div id="nav-item" class='dropDownContainer' *ngFor="let type of objectKeys(filters) ; index as i;">
-    <div class='dropHeader' id={{type}} (click)="displayFilterDropdown($event)">
-      <div class='nav-text'>
-        {{type}}
-      </div>
-      <div class='arrowInCircle'>
-        <div *ngIf='checkIfElementIsAlreadyInArray(type,displayedFiltersDropdowns); else down'>
-          <i class="fa fa-angle-up"></i>
-        </div>
-        <ng-template #down>
-          <div>
-            <i class="fa fa-angle-down"></i>
-          </div>
-        </ng-template>
-      </div>
-    </div>
-    <div class="drop-down" *ngIf="checkIfElementIsAlreadyInArray(type,displayedFiltersDropdowns)">
-      <div class="drop-down-menu">
-        <div *ngFor="let product of filters[type]; index as i;" class='item' id='{{product}}' (click)="selectDropdownValue($event)">
-          <div class='circle' [class.selected]="checkIfElementIsAlreadyInArray(product,selectedDropDownsValues)">
-          </div>
-          <div class='item-txt'>
-            {{product}}
+<div class="wrapper">
+  <nav>
+    <div id="nav-item" class="nav-choice">
+      <div>
+        <h5>your choice</h5>
+        <div class="checked-filters" *ngFor="let checkedFilter of selectedDropDownsValues">
+          <div class="checked-filter">
+            <div>
+              {{checkedFilter}}
+            </div>
+            <div class="remove">
+              <i class="fa fa-remove" style="font-size:15px" (click)="removeItem(checkedFilter)"></i>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</nav>
+    <div id="nav-item" class="slider-wrapper">
+      <div class="nav-text">
+        price
+      </div>
+      <div class="slider">
+        <nouislider [config]="sliderConfig" [(ngModel)]="someRange" (change)="triggerUpdate($event)"></nouislider>
+      </div>
+    </div>
+    <div id="nav-item" class='dropDownContainer' *ngFor="let type of objectKeys(filters) ; index as i;">
+      <div class='dropHeader' id={{type}} (click)="displayFilterDropdown($event)">
+        <div class='nav-text'>
+          {{type}}
+        </div>
+        <div class='arrowInCircle'>
+          <div *ngIf='checkIfElementIsAlreadyInArray(type,displayedFiltersDropdowns); else down'>
+            <i class="fa fa-angle-up"></i>
+          </div>
+          <ng-template #down>
+            <div>
+              <i class="fa fa-angle-down"></i>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <div class="drop-down" *ngIf="checkIfElementIsAlreadyInArray(type,displayedFiltersDropdowns)">
+        <div class="drop-down-menu">
+          <div *ngFor="let product of filters[type]; index as i;" class='item' id='{{product}}' (click)="selectDropdownValue($event)">
+            <div class='circle' [class.selected]="checkIfElementIsAlreadyInArray(product,selectedDropDownsValues)">
+            </div>
+            <div class='item-txt'>
+              {{product}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>

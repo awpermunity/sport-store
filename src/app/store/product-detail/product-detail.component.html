@@ -1,38 +1,71 @@
-<div class="container">
-  <div class="wrapper">
+<div class="product-content" *ngIf='product'>
+  <div class="product-header">
+    <div class="container">
+      <span class="back" (click)="goBack()">
+      <i class="fa fa-arrow-circle-left"></i>
+      <span>Back</span>
+      </span>
+      <span> {{product.details.category}} </span>
+      <span>
+        <i class="fa fa-angle-right"></i>
+    </span>
+      <span>{{product.details.brand}} </span>
+      <span>
+    <i class="fa fa-angle-right"></i>
+    </span>
+      <span>{{product.name}}</span>
+    </div>
+  </div>
+  <div class="product-wrapper">
     <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
     <div class="order-info">
       <div class="description ">
-        <a>
-          <p>{{product.name}}</p>
+        <div class="brand-logo">
+          <img src="../../../assets/img/brands/{{product.details.brand}}.jpg ">
+        </div>
+        <a class="brand">
+          {{product.details.brand}}
         </a>
-        <a>
-          <p>{{product.details.brand}}</p>
+        <a class="name">
+          <h2>{{product.name}}</h2>
         </a>
-        <a>
-          <p>{{product.details.category}}</p>
+        <a class="category">
+          {{product.details.category}}
         </a>
-        <a>
-          <span>{{product.category}}</span>
+        <a class="rating ">
+           Rating 
+          <div class="rating-stars ">
+            <app-rating [declaredRating]="declaredRating "> </app-rating>
+          </div>
         </a>
-        <div class="price-container ">
-          <span>${{product.price}}</span>
+        <div class="price">
+          <h2> ${{product.price}} </h2>
+        </div>
+        <div class="availability">
+          <div class="available" *ngIf="product.quantity>0; else notAvailable">
+            <div class="circle">
+              <i class="fa fa-check"></i>
+            </div>
+            In stock, ready to despatch
+          </div>
+          <ng-template #notAvailable>
+            <div class="not-available">
+              <div class="circle">
+                <i class="fa fa-times"></i>
+              </div>
+              Sold Out
+            </div>
+          </ng-template>
         </div>
       </div>
       <div class="item-info ">
-        <div class="buttons-wrapper ">
+        <div class="button-wrapper ">
           <a href="#" class="btn btn-info btn-lg">
             <i class="fa fa-cart-arrow-down"></i>
             Add to Cart
           </a>
         </div>
         <div>
-        </div>
-        <div class="rating ">
-          <span> Rating </span>
-          <div class="rating-stars ">
-            <app-rating [declaredRating]="declaredRating "> </app-rating>
-          </div>
         </div>
       </div>
     </div>

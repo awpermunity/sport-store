@@ -37,7 +37,9 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnChanges() {
-    this.filters = this.getFiltersFromGivenProducts();
+    if (this.products) {
+      this.filters = this.getFiltersFromGivenProducts();
+    }
   }
 
   getFiltersFromGivenProducts() {
@@ -81,7 +83,7 @@ export class SidebarComponent implements OnInit {
   }
 
   objectKeys(object) {
-    return Object.keys(object)
+    return object ? Object.keys(object) : object;
   }
   removeItem(event) {
     this.selectedDropDownsValues = this.selectedDropDownsValues.filter(value => value !== event);

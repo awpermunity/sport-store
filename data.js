@@ -9,7 +9,9 @@ module.exports = function () {
                     category: 'football',
                     brand: 'adidas'
                 },
-                description: 'Machine-stitched with recycled rubber materials to handle the impact of indoor courts'
+                description: 'Machine-stitched with recycled rubber materials to handle the impact of indoor courts',
+                numberOfImages: 1,
+                quantity: 2
             },
             {
                 id: 2,
@@ -20,6 +22,8 @@ module.exports = function () {
                     brand: 'adidas'
                 },
                 description: 'Add resistance to your cardio workouts or focus on effective muscle building through free weight training',
+                numberOfImages: 1,
+                quantity: 2
             },
             {
                 id: 3,
@@ -30,7 +34,9 @@ module.exports = function () {
                     brand: 'adidas',
                     size: 'm'
                 },
-                description: 'bla bla bla'
+                description: 'bla bla bla',
+                numberOfImages: 1,
+                quantity: 2
             },
             {
                 id: 4,
@@ -38,9 +44,11 @@ module.exports = function () {
                 price: 5000,
                 details: {
                     category: 'skate',
-                    brand: 'duffs'
+                    brand: 'DuFFS'
                 },
                 description: 'DuFFS 31x8 inch deck skateboard with cool DuFFS graphic underneath its perfect for the young skateboard enthusiast.',
+                numberOfImages: 3,
+                quantity: 2
             },
             {
                 id: 5,
@@ -51,6 +59,8 @@ module.exports = function () {
                     brand: 'nike'
                 },
                 description: 'Nike neck warmer. 100% polyester',
+                numberOfImages: 2,
+                quantity: 0
             },
             {
                 id: 6,
@@ -60,7 +70,9 @@ module.exports = function () {
                     category: 'bags',
                     brand: 'adidas'
                 },
-                description: 'adidas Originals sleek leather -look backpack with inner laptop pocket.'
+                description: 'adidas Originals sleek leather -look backpack with inner laptop pocket.',
+                numberOfImages: 2,
+                quantity: 2
             },
             {
                 id: 7,
@@ -70,7 +82,9 @@ module.exports = function () {
                     category: 'bags',
                     brand: 'beck'
                 },
-                description: 'Beck And Hersey backpack with an all-over printed design.'
+                description: 'Beck And Hersey backpack with an all-over printed design.',
+                numberOfImages: 2,
+                quantity: 2
             },
             {
                 id: 8,
@@ -80,7 +94,9 @@ module.exports = function () {
                     category: 'bags',
                     brand: 'beck'
                 },
-                description: 'Beck And Hersey backpack with an all-over printed design.'
+                description: 'Beck And Hersey backpack with an all-over printed design.',
+                numberOfImages: 2,
+                quantity: 2
             },
             {
                 id: 9,
@@ -90,7 +106,9 @@ module.exports = function () {
                     category: 'bags',
                     brand: 'original'
                 },
-                description: 'Original Penguin zip fastening backpack'
+                description: 'Original Penguin zip fastening backpack',
+                numberOfImages: 2,
+                quantity: 2
             },
             {
                 id: 10,
@@ -98,41 +116,36 @@ module.exports = function () {
                 price: 5000,
                 details: {
                     category: 'rugby',
-                    brand: 'Canterbury',
+                    brand: 'canterbury',
                     size: 'm'
                 },
-                description: 'Canterbury headguard with honeycomb structured design for greater flexibility and the ear piece protection maximises hearing and designed to shape the head.'
+                description: 'Canterbury headguard with honeycomb structured design for greater flexibility and the ear piece protection maximises hearing and designed to shape the head.',
+                numberOfImages: 2,
+                quantity: 2
             },
             {
                 id: 11,
-                name: 'Canterbury Mens CCC Honeycomb Headguard Black',
-                price: 2322,
-                details: {
-                    category: 'rugby',
-                    brand: 'Canterbury',
-                    size: 'm'
-                },
-                description: 'Canterbury headguard with honeycomb structured design for greater flexibility and the ear piece protection maximises hearing and designed to shape the head.'
-            },
-            {
-                id: 12,
                 name: 'Adidas Mens Torpedo X-Treme Rugby Ball White/Collegiate Navy/Scarlet',
                 price: 5000,
                 details: {
                     category: 'rugby',
                     brand: 'adidas'
                 },
-                description: 'Canterbury headguard with honeycomb structured design for greater flexibility and the ear piece protection maximises hearing and designed to shape the head.'
+                description: 'headguard with honeycomb structured design for greater flexibility and the ear piece protection maximises hearing and designed to shape the head.',
+                numberOfImages: 1,
+                quantity: 2
             },
             {
-                id: 13,
+                id: 12,
                 name: 'Reebok Womens CrossFit Speedwick Competition Gloves Black',
                 price: 5000,
                 details: {
                     category: 'crossfit',
                     brand: 'reebok'
                 },
-                description: 'Reebok CrossFit competition gloves Rubberised logo'
+                description: 'Reebok CrossFit competition gloves Rubberised logo',
+                numberOfImages: 1,
+                quantity: 2
             },
 
         ],
