@@ -136,7 +136,7 @@ border: 1px solid black;
     font-size: 20px; 
 }
 
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 500px) {
     .wrapper{
         display: flex;
         justify-content: center;
@@ -146,9 +146,13 @@ border: 1px solid black;
     }
 }
 
-// @media only screen and (min-width: 640px) and (max-width:960px), handheld and (orientation: landscape) {
-//         .wrapper{
-//             flex-direction: row !important;
-            
-//            }
-//     }
+@media only screen and (min-width: 500px) and (max-width:960px), handheld and (orientation: landscape) {
+    .wrapper{
+        width: 230px;
+        display: flex;
+        justify-content: center;
+        nav{
+            width: 100%;     
+           }
+    }
+    }
