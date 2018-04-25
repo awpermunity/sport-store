@@ -1,5 +1,7 @@
 export interface Product {
+
     id?: number;
+    groupID?: number;
     name?: string;
     price: number;
     details: {
@@ -8,6 +10,6 @@ export interface Product {
         size?: string;
     }
     description: string;
-    numberOfImages: number;
-    quantity: number;
+    imgsPaths: Array<string>;
+    offers: Array<any>;
 }

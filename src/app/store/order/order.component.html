@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="nav-wrapper">
+    <div class="back" (click)="goBack()">
+      <i class="fa fa-arrow-circle-left"></i> BACK
+    </div>
+    <div class="order-nav">
+      <div class="item">
+        <div class="circle" routerLink='/order/address' routerLinkActive='active'>
+          1
+        </div>
+        Addres data
+      </div>
+      <i class="fa fa-chevron-right"></i>
+      <div class="item ">
+        <div class="circle" routerLink='/order/delivery' routerLinkActive='active'>
+          2
+        </div>
+        Delivery
+      </div>
+      <i class="fa fa-chevron-right"></i>
+      <div class="item">
+        <div class="circle" routerLink='/order/confirmation' routerLinkActive='active'>
+          3
+        </div>
+        Confirmation
+      </div>
+    </div>
+  </div>
+  <div class="order-wrapper">
+    <div class="order-data">
+      <router-outlet (form)="goToTheNextStep($event)"></router-outlet>
+    </div>
+    <div class="totals">
+      <app-order-summary></app-order-summary>
+    </div>

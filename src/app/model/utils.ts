@@ -10,4 +10,8 @@ export class Utils {
             return arr.indexOf(elem) === pos;
         });
     }
+
+    static objectKeys(object) {
+        return object ? Object.keys(object) : object;
+    }
 }

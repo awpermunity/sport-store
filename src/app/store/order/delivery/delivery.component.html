@@ -1,0 +1,70 @@
+<form [formGroup]="deliveryForm">
+  <div class="content-wrapper">
+    <div class="header-wrapper">
+      <h2>
+        Choose shipment method :
+      </h2>
+    </div>
+    <div class="row-delivery">
+      <a>
+        <input type="radio" value='Payment online' formControlName="method">
+        <label>
+          <span>
+              Payment online
+          </span>
+        </label>
+      </a>
+      <a>
+        <input type="radio" value='Payment on delivery' formControlName="method">
+        <label>
+          <span>
+              Payment on delivery
+          </span>    
+          </label>
+        </a>
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <div class="header-wrapper">
+      <h2>
+        Choose type of shipment :
+      </h2>
+    </div>
+    <div class="column-delivery type">
+      <a *ngFor='let shipmentType of shipmentTypes'>
+          <input type="radio" value='{{shipmentType.name}}' formControlName="type" (click)='updateDeliveryCost(shipmentType.price)'>                 
+          <label>
+        <img src="../../../assets/img/delivery/{{shipmentType.img}}" />
+        <span>
+            {{shipmentType.name}} <span> ({{costs.subtotal>=200? 0 : shipmentType.price}} $)</span>
+            <br>
+            <span class="text-muted">
+            Shipping time: {{shipmentType.shippingTime}}h
+            </span>
+        </span>
+      </label>                
+      </a>
+    </div>
+  </div>
+  <div *ngIf="deliveryForm.value.method" class="content-wrapper">
+    <div class="header-wrapper">
+      <h2>
+        Choose payment method :
+      </h2>
+    </div>
+    <div class="column-delivery">
+      <a *ngIf="deliveryForm.value.method === 'Payment online'">
+    <input type="radio" value='Traditional bank transefer' formControlName="payment">Traditional bank transefer
+  </a>
+      <a *ngIf="deliveryForm.value.method === 'Payment on delivery'">
+    <input type="radio" value='Shipment on delivery' formControlName="payment">Shipment on delivery
+  </a>
+    </div>
+  </div>
+  <div class='button'>
+    <button [disabled]="deliveryForm.invalid" (click)="addDeliveryFormValue()" class="btn btn-primary btn-lg" type="submit">
+      Go to checkout
+    </button>
+  </div>
+</form>
+<pre>{{deliveryForm.value | json}}</pre>

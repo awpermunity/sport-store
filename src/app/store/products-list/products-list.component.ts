@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../model/product.model';
-import { StoreService } from '../../store.service';
+import { StoreService } from '../services/store.service';
 import { Router } from "@angular/router";
 
 @Component({
@@ -39,7 +39,6 @@ export class ProductsListComponent implements OnInit {
 
   manageProducts(products) {
     if (this.checkedFilters && this.checkedFilters.details) {
-      console.log('filterProducts', this.checkedFilters.details)
       products = this.filterProducts(products)
     }
     products = this.sortProducts(products)
@@ -83,7 +82,6 @@ export class ProductsListComponent implements OnInit {
   }
 
   goToDetails(product: Product): void {
-    console.log("asdasd: ", product.id);
     this.router.navigate(['/product', product.id])
   }
 

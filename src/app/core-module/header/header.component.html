@@ -6,18 +6,42 @@
       </div>
       <nav>
         <div class="items">
-          <a class="item">Home</a>
-          <div class="nav-spacer"></div>
-          <a class="item">Profile</a>
-          <div class="nav-spacer"></div>
           <div class="item">
-            <a>Contact</a>
-            <i class="fa fa-phone"></i>
+            <a>
+             Home
+          </a>
           </div>
           <div class="nav-spacer"></div>
           <div class="item">
-            <a>Logout</a>
+            <a>Profile</a>
+          </div>
+          <div class="nav-spacer"></div>
+          <div class="item">
+            <a>Contact
+            <div>
+            <i class="fa fa-phone"></i>
+          </div>
+          </a>
+          </div>
+          <div class="nav-spacer"></div>
+          <div class="item">
+            <a>Logout
+              <div>
             <i class="fa fa-user"></i>
+              </div>
+          </a>
+          </div>
+          <div class="nav-spacer"></div>
+          <div class="item">
+            <a class="bag-content" routerLink='/cart' routerLinkActive="router-link-active">
+            MY BAG
+            <div class="bag">
+            <i class="fa fa-shopping-bag"></i>
+            <div class='bag-counter' *ngIf="bagCount>0">
+              {{bagCount}}
+            </div>
+            </div>
+          </a>
           </div>
           <div class="align-justify">
             <i class="fa fa-align-justify"></i>

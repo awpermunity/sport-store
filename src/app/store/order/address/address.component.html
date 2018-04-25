@@ -1,0 +1,76 @@
+<form [formGroup]="addressForm">
+  <div class="formRow">
+    <div class="item">
+      <label>Firstname*</label>
+      <input class="form-control" placeholder="firstname" formControlName="firstname">
+      <p *ngIf="!addressForm.get('firstname').valid && addressForm.get('firstname').dirty" class="error">This field is required</p>
+    </div>
+    <div class="item">
+      <label>Lastname*</label>
+      <input class="form-control" placeholder="lastname" formControlName="lastname">
+      <p *ngIf="!addressForm.get('lastname').valid && addressForm.get('lastname').dirty" class="error">This field is required</p>
+    </div>
+  </div>
+  <div class="address">
+    <label>Address*</label>
+    <input class="form-control" placeholder="address" formControlName="address">
+    <p *ngIf="!addressForm.get('address').valid && addressForm.get('address').dirty" class="error">This field is required</p>
+  </div>
+  <div class="address">
+    <label>Company name</label>
+    <input class="form-control" placeholder="company" formControlName="company">
+  </div>
+  <div class="formRow">
+    <div class="item">
+      <label>Postcode*</label>
+      <input class="form-control" placeholder="postcode" formControlName="postcode">
+      <p *ngIf="!addressForm.get('postcode').valid && addressForm.get('postcode').dirty " class="error">This field is required</p>
+    </div>
+    <div class="item">
+      <label>City*</label>
+      <input class="form-control" placeholder="city" formControlName="city">
+      <p *ngIf="!addressForm.get('city').valid && addressForm.get('city').dirty" class="error">This field is required</p>
+    </div>
+  </div>
+  <div>
+    <label>Country*</label>
+    <input class="form-control" placeholder="country" formControlName="country">
+    <p *ngIf="!addressForm.get('country').valid && addressForm.get('country').dirty " class="error">This field is required</p>
+  </div>
+  <div class="formRow">
+    <div>
+      <label>Phone*</label>
+      <input class="form-control" placeholder="phone" formControlName="phone">
+      <p *ngIf="!addressForm.get('phone').valid && addressForm.get('phone').dirty" class="error">This field is required</p>
+    </div>
+    <div>
+      <label>Email*</label>
+      <input class="form-control" placeholder="email" formControlName="email">
+      <p *ngIf="!addressForm.get('email').valid && addressForm.get('email').dirty " class="error">This field is required</p>
+    </div>
+  </div>
+  <div class="terms">
+    <div class="term">
+      <label>I agree to sending information about changing of order status by SMS to the phone number
+        above.</label>
+      <input type="checkbox" formControlName="spam">
+    </div>
+    <div class="term">
+      <label>
+      <span>
+        I accept Terms and conditions *
+      </span>
+    </label>
+      <input type="checkbox" formControlName="term">
+      <p *ngIf="!addressForm.get('term').valid && addressForm.get('term').dirty " class="error">This field is required</p>
+    </div>
+  </div>
+  <div class="buttons">
+    <button (click)="addressForm.reset()" class="btn btn-default btn-lg"> clear </button>
+    <button (click)="addAddressFormValue()" class="btn btn-primary btn-lg" type="submit">
+        order
+      </button>
+  </div>
+  <pre>{{addressForm.value | json}}</pre>
+
+</form>

@@ -1,10 +1,11 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
-import { StoreService } from '../../store.service';
+import { StoreService } from '../services/store.service';
 import { Product } from '../../model/product.model';
 import { Location } from '@angular/common';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
+import { CartService } from '../services/cart.service';
 
 
 @Component({
@@ -16,10 +17,15 @@ export class ProductDetailComponent {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[] = [];
   declaredRating: number;
+  productAdded: boolean;
   product: Product;
+  productSizesUrl: any;
+  dropdownStatus: boolean = false;
+  selectedSize: string;
 
   constructor(
     private storeService: StoreService,
+    private cartService: CartService,
     private route: ActivatedRoute,
     private location: Location,
   ) {
@@ -42,6 +48,24 @@ export class ProductDetailComponent {
   }
   goBack(): void {
     this.location.back();
+  }
+
+  addProduct(product: Product) {
+    if (!this.selectedSize) {
+      this.dropdownStatus = true;
+      return;
+    }
+    this.productAdded = true;
+    const selectedProduct = {
+      data: product,
+      selectedOptions: {
+        size: this.selectedSize,
+        quantity: 1
+      },
+      uniqueName: this.product.id + this.selectedSize
+    }
+    this.cartService.addProduct(selectedProduct);
+    setTimeout(() => this.productAdded = false, 3000);
   }
 
   setGalleryConfig() {
@@ -75,21 +99,27 @@ export class ProductDetailComponent {
   }
 
   setGalleryImages() {
-    const imgPath = "../../../assets/img/products/";
-    let productId = this.product.id;
     const jpg = ".jpg";
-    for (let i = 0; i < this.product.numberOfImages; i++) {
-      let nextImg = i / 10;
-      let imgProductId = nextImg === 0 ? productId : productId + nextImg;
-      let fullPath = imgPath + imgProductId + jpg;
+    const imgPath = "../../../assets/img/products/";
+    this.product.imgsPaths.forEach(path => {
+      let fullPath = imgPath + path;
       let galleryImage =
         {
           small: fullPath,
           medium: fullPath,
           big: fullPath
         }
-      this.galleryImages.push(galleryImage);
-    }
+      this.galleryImages.push(galleryImage)
+    });
+  }
+
+  switchDropdownStatus() {
+    this.dropdownStatus = !this.dropdownStatus
+  }
+
+  selectSize(event) {
+    this.selectedSize = event.size;
+    this.switchDropdownStatus();
   }
 
 }

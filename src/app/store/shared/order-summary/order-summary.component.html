@@ -1,0 +1,29 @@
+<div class="cart-content">
+  <div class="totals">
+    <div>
+      <h2> Total </h2>
+      <div class="total-item">
+        <a>Products</a>
+        <a>{{bagCount}}</a>
+      </div>
+      <div class="total-item">
+        <a>Delivery cost</a>
+        <a *ngIf='cartCost; else orderCost'>
+        {{cartCost}}  
+        </a>
+        <ng-template #orderCost>
+          <a> {{costs.delivery}} $</a>
+        </ng-template>
+      </div>
+      <div class="total-item">
+        <a>Subtotal</a>
+        <a>{{costs.subtotal}}$</a>
+      </div>
+      <div class="vat">
+        <a>Total (VAT included)</a>
+        <a>{{costs.total}}$</a>
+      </div>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

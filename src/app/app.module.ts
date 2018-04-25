@@ -5,13 +5,14 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppComponent } from './app.component';
 import { ProductsListComponent } from './store/products-list/products-list.component';
 import { StoreModule } from './store/store.module';
-import { StoreService } from './store.service';
+import { StoreService } from './store/services/store.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CoreModule } from './core-module/core.module';
 import { routing } from './app.routing';
 import { RouterModule } from '@angular/router';
-import { SortPipe } from './shared/pipes/sort.pipe';
-import { SharedModule } from './shared/shared.module';
+import { CartService } from './store/services/cart.service';
+import { StorageServiceModule } from 'angular-webstorage-service'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,16 +20,16 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
+    StorageServiceModule,
     HttpClientModule,
     StoreModule,
     AngularFontAwesomeModule,
     CoreModule,
     RouterModule,
     routing,
-    SharedModule
   ],
   exports: [],
-  providers: [StoreService],
+  providers: [StoreService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

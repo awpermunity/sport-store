@@ -1,0 +1,85 @@
+<div class="confirm-wrapper">
+  <h2>
+    Check in and checkout
+  </h2>
+
+  <div [ngClass]="checkIfSpacerIsNeeded(product)" *ngFor="let product of productsInBag">
+    <div class="item-image" (click)="goToDetails(product)">
+      <img src="../../../../assets/img/products/{{product.data.id}}.jpg ">
+    </div>
+    <div class="item-info">
+      <div class="product-description">
+        <div>
+          {{product.data.name}}
+        </div>
+        <div class="product-details" *ngFor="let type of objectKeys(product.data.details)">
+          <div class="detail">
+            {{type}} : {{product.data.details[type]}}
+          </div>
+        </div>
+        <div>
+          size {{product.selectedOptions.size}}
+        </div>
+      </div>
+      <div class="quantity">
+        <span> QUANTITY </span>
+        <div class="quantity-picker">
+          <div class="quantity-number">
+            {{product.selectedOptions.quantity}}
+          </div>
+        </div>
+      </div>
+      <div class="product-price">
+        <h5>{{product.data.price}}$</h5>
+      </div>
+    </div>
+  </div>
+
+  <h2>
+    Summary
+  </h2>
+
+  <div class="order-details">
+    <div class="detail">
+      <li class="label"> The chosen method of delivery</li>
+      <li class="value"> {{order.delivery.method}} </li>
+    </div>
+    <div class="detail">
+      <li class="label"> The selected type of shipment</li>
+      <li class="value"> {{order.delivery.type}} </li>
+    </div>
+    <div class="detail">
+      <li class="label"> The selected method of payment:</li>
+      <li class="value"> {{order.delivery.payment}} </li>
+    </div>
+    <div class="detail">
+      <li class="label"> Delivery data:</li>
+      <div class='detail-column'>
+        <div class="value">
+          <div>
+            {{order.address.firstname}} {{order.address.lastname}}
+          </div>
+        </div>
+        <div class="value">
+          {{order.address.address}}
+        </div>
+        <div class="value">
+          {{order.address.postcode}}
+        </div>
+        <div class="value">
+          {{order.address.city}}
+        </div>
+        <div class="value">
+          {{order.address.email}}
+        </div>
+        <div class="value">
+          {{order.address.phone}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="button">
+    <button (click)="sendOrder()" class="btn btn-primary btn-lg" type="submit">
+      Go to checkout
+  </button>
+  </div>

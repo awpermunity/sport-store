@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { StoreService } from '../../store.service';
-import { Product } from '../../model/product.model';
 import { NouiFormatter } from "ng2-nouislider";
 import { Utils } from '../../model/utils';
 
@@ -50,8 +48,6 @@ export class SidebarComponent implements OnInit {
     });
     const merge = Utils.merge(keys);
     const keysWithoutDuplicates = Utils.removeDuplicates(merge)
-    console.log(keysWithoutDuplicates)
-
     keysWithoutDuplicates.forEach(key => {
       obj[key] = [];
     })
@@ -75,7 +71,6 @@ export class SidebarComponent implements OnInit {
   }
 
   constructor(
-    private storeService: StoreService,
 
   ) { }
 
@@ -83,8 +78,9 @@ export class SidebarComponent implements OnInit {
   }
 
   objectKeys(object) {
-    return object ? Object.keys(object) : object;
+    return Utils.objectKeys(object);
   }
+
   removeItem(event) {
     this.selectedDropDownsValues = this.selectedDropDownsValues.filter(value => value !== event);
     this.emitFilters()
@@ -93,7 +89,6 @@ export class SidebarComponent implements OnInit {
   displayFilterDropdown(event) {
     const filter = event.target.id;
     this.displayedFiltersDropdowns = this.onSelect(filter, this.displayedFiltersDropdowns);
-    console.log('displayFilterDropDown', this.displayedFiltersDropdowns)
   }
 
   selectDropdownValue(event) {
@@ -119,7 +114,6 @@ export class SidebarComponent implements OnInit {
 
   addToSelectedFilters(inputElement, array) {
     array.push(inputElement);
-    console.log('selectedDropDownsValues', this.selectedDropDownsValues);
     return array;
   }
 

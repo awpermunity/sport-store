@@ -1,17 +1,24 @@
 module.exports = function () {
     return {
-        products: [
+        productsGroup: [
             {
                 id: 1,
                 name: 'Ball',
                 price: 55,
                 details: {
                     category: 'football',
-                    brand: 'adidas'
+                    brand: 'adidas',
                 },
                 description: 'Machine-stitched with recycled rubber materials to handle the impact of indoor courts',
-                numberOfImages: 1,
-                quantity: 2
+                imgsPaths: ['1.jpg'],
+                offers: [
+                    {
+                        size: "one-size",
+                        quantity: 5
+                    }
+                ]
+
+
             },
             {
                 id: 2,
@@ -22,8 +29,13 @@ module.exports = function () {
                     brand: 'adidas'
                 },
                 description: 'Add resistance to your cardio workouts or focus on effective muscle building through free weight training',
-                numberOfImages: 1,
-                quantity: 2
+                imgsPaths: ['2.jpg'],
+                offers: [
+                    {
+                        size: "one-size",
+                        quantity: 2
+                    }
+                ]
             },
             {
                 id: 3,
@@ -31,12 +43,36 @@ module.exports = function () {
                 price: 5000,
                 details: {
                     category: 'football',
-                    brand: 'adidas',
-                    size: 'm'
+                    brand: 'adidas'
                 },
                 description: 'bla bla bla',
-                numberOfImages: 1,
-                quantity: 2
+                imgsPaths: ['3.jpg'],
+                offers: [
+                    {
+                        size: "s",
+                        quantity: 5
+                    },
+                    {
+                        size: "m",
+                        quantity: 5
+                    },
+                    {
+                        size: "xs",
+                        quantity: 5
+                    },
+                    {
+                        size: "l",
+                        quantity: 5
+                    },
+                    {
+                        size: "xl",
+                        quantity: 5
+                    },
+                    {
+                        size: "xxl",
+                        quantity: 5
+                    }
+                ]
             },
             {
                 id: 4,
@@ -47,8 +83,13 @@ module.exports = function () {
                     brand: 'DuFFS'
                 },
                 description: 'DuFFS 31x8 inch deck skateboard with cool DuFFS graphic underneath its perfect for the young skateboard enthusiast.',
-                numberOfImages: 3,
-                quantity: 2
+                imgsPaths: ['4.jpg', '4.1.jpg', '4.2.jpg'],
+                offers: [
+                    {
+                        size: "one-size",
+                        quantity: 5
+                    }
+                ]
             },
             {
                 id: 5,
@@ -59,8 +100,33 @@ module.exports = function () {
                     brand: 'nike'
                 },
                 description: 'Nike neck warmer. 100% polyester',
-                numberOfImages: 2,
-                quantity: 0
+                imgsPaths: ['5.jpg', '5.1.jpg'],
+                offers: [
+                    {
+                        size: "s",
+                        quantity: 5
+                    },
+                    {
+                        size: "m",
+                        quantity: 5
+                    },
+                    {
+                        size: "xs",
+                        quantity: 5
+                    },
+                    {
+                        size: "l",
+                        quantity: 5
+                    },
+                    {
+                        size: "xl",
+                        quantity: 5
+                    },
+                    {
+                        size: "xxl",
+                        quantity: 5
+                    }
+                ]
             },
             {
                 id: 6,
@@ -71,8 +137,13 @@ module.exports = function () {
                     brand: 'adidas'
                 },
                 description: 'adidas Originals sleek leather -look backpack with inner laptop pocket.',
-                numberOfImages: 2,
-                quantity: 2
+                imgsPaths: ['6.jpg', '6.1.jpg'],
+                offers: [
+                    {
+                        size: "one-size",
+                        quantity: 5
+                    }
+                ]
             },
             {
                 id: 7,
@@ -83,8 +154,13 @@ module.exports = function () {
                     brand: 'beck'
                 },
                 description: 'Beck And Hersey backpack with an all-over printed design.',
-                numberOfImages: 2,
-                quantity: 2
+                imgsPaths: ['7.jpg', '7.1.jpg'],
+                offers: [
+                    {
+                        size: "one-size",
+                        quantity: 5
+                    }
+                ]
             },
             {
                 id: 8,
@@ -95,8 +171,13 @@ module.exports = function () {
                     brand: 'beck'
                 },
                 description: 'Beck And Hersey backpack with an all-over printed design.',
-                numberOfImages: 2,
-                quantity: 2
+                imgsPaths: ['8.jpg', '8.1.jpg'],
+                offers: [
+                    {
+                        size: "one-size",
+                        quantity: 5
+                    }
+                ]
             },
             {
                 id: 9,
@@ -107,8 +188,13 @@ module.exports = function () {
                     brand: 'original'
                 },
                 description: 'Original Penguin zip fastening backpack',
-                numberOfImages: 2,
-                quantity: 2
+                imgsPaths: ['9.jpg', '9.1.jpg'],
+                offers: [
+                    {
+                        size: "one-size",
+                        quantity: 5
+                    }
+                ]
             },
             {
                 id: 10,
@@ -116,12 +202,38 @@ module.exports = function () {
                 price: 5000,
                 details: {
                     category: 'rugby',
-                    brand: 'canterbury',
-                    size: 'm'
+                    brand: 'canterbury'
                 },
                 description: 'Canterbury headguard with honeycomb structured design for greater flexibility and the ear piece protection maximises hearing and designed to shape the head.',
-                numberOfImages: 2,
-                quantity: 2
+                imgsPaths: ['10.jpg', '10.1.jpg'],
+                offers: [
+                    {
+                        size: "s",
+                        quantity: 5
+                    },
+                    {
+                        size: "m",
+                        quantity: 5
+                    },
+                    {
+                        size: "xs",
+                        quantity: 5
+                    },
+                    {
+                        size: "l",
+                        quantity: 5
+                    },
+                    {
+                        size: "xl",
+                        quantity: 5
+                    },
+                    {
+                        size: "xxl",
+                        quantity: 5
+                    }
+                ]
+
+
             },
             {
                 id: 11,
@@ -132,8 +244,13 @@ module.exports = function () {
                     brand: 'adidas'
                 },
                 description: 'headguard with honeycomb structured design for greater flexibility and the ear piece protection maximises hearing and designed to shape the head.',
-                numberOfImages: 1,
-                quantity: 2
+                imgsPaths: ['11.jpg'],
+                offers: [
+                    {
+                        size: "one-size",
+                        quantity: 5
+                    }
+                ]
             },
             {
                 id: 12,
@@ -144,10 +261,57 @@ module.exports = function () {
                     brand: 'reebok'
                 },
                 description: 'Reebok CrossFit competition gloves Rubberised logo',
-                numberOfImages: 1,
-                quantity: 2
+                imgsPaths: ['12.jpg'],
+                offers: [
+                    {
+                        size: "s",
+                        quantity: 5
+                    },
+                    {
+                        size: "m",
+                        quantity: 5
+                    },
+                    {
+                        size: "xs",
+                        quantity: 5
+                    },
+                    {
+                        size: "l",
+                        quantity: 5
+                    },
+                    {
+                        size: "xl",
+                        quantity: 5
+                    },
+                    {
+                        size: "xxl",
+                        quantity: 5
+                    }
+                ]
+
             },
 
+        ],
+        shipmentTypes: [
+            {
+                name: 'UPS Courier',
+                price: 10,
+                shippingTime: 72,
+                img: 'ups.jpg'
+
+            },
+            {
+                name: 'DHL Courier',
+                price: 12,
+                shippingTime: 72,
+                img: 'dhl.jpg'
+            },
+            {
+                name: 'Personal collection',
+                price: 0,
+                shippingTime: 0,
+                img: 'location.jpg'
+            }
         ],
         orders: []
     }

@@ -41,8 +41,35 @@
         <div class="price">
           <h2> ${{product.price}} </h2>
         </div>
-        <div class="availability">
-          <div class="available" *ngIf="product.quantity>0; else notAvailable">
+        <div class="size-picker-wrapper">
+          <div class="size-picker" (click)='switchDropdownStatus()'>
+            <div *ngIf='selectedSize;else defaultSizeText'>
+              {{selectedSize}}
+            </div>
+            <ng-template #defaultSizeText>
+              Choose your size
+            </ng-template>
+            <div class='arrowInCircle'>
+              <div *ngIf='dropdownStatus; else down'>
+                <i class="fa fa-angle-up"></i>
+              </div>
+              <ng-template #down>
+                <div>
+                  <i class="fa fa-angle-down"></i>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+          <div class="dropdown" *ngIf="dropdownStatus">
+            <div class="dropdown-menu">
+              <div *ngFor="let offer of product.offers; index as i;">
+                <div *ngIf="offer.quantity>0" class='size-item' (click)='selectSize(offer)'>{{offer.size}} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="availability " [ngStyle]="{ 'visibility':dropdownStatus ? 'hidden' : 'visible' } ">
+          <div class="available " *ngIf="product.quantity>0; else notAvailable">
             <div class="circle">
               <i class="fa fa-check"></i>
             </div>
@@ -56,16 +83,20 @@
               Sold Out
             </div>
           </ng-template>
-        </div>
+        </div> -->
       </div>
       <div class="item-info ">
-        <div class="button-wrapper ">
-          <a href="#" class="btn btn-info btn-lg">
-            <i class="fa fa-cart-arrow-down"></i>
-            Add to Cart
-          </a>
-        </div>
-        <div>
+        <div class="button-wrapper">
+          <div *ngIf="!productAdded; else addToBag">
+            <div class="btn btn-info btn-lg" (click)="addProduct(product)">
+              <i class="fa fa-cart-arrow-down"></i> Add to Bag
+            </div>
+          </div>
+          <ng-template #addToBag>
+            <div class="btn btn-success btn-lg addedToBag">
+              <i class="fa fa-check"></i> Added to Bag
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>
