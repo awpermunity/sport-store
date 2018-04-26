@@ -33,8 +33,7 @@ export class CartComponent implements OnInit {
   }
 
   checkIfQuantityIsMaximum(selectedProduct) {
-    let offer = selectedProduct.data.offers.find(offer => offer.size === selectedProduct.selectedOptions.size)
-    return offer.quantity === selectedProduct.selectedOptions.quantity;
+    return selectedProduct.availableQuantity <= selectedProduct.selectedOptions.quantity;
   }
 
   reduceQuantity(product) {

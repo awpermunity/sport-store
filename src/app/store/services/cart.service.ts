@@ -53,7 +53,7 @@ export class CartService {
   }
 
   addForm(formValue, formName) {
-    this.orderForm[formName] = formValue
+    // this.orderForm[formName] = formValue
     this.formSubject.next(this.orderForm)
     console.log('FORRMM', this.orderForm);
   }
@@ -72,6 +72,9 @@ export class CartService {
   }
 
   updateCart() {
+    this.orderForm.products = this.addedProducts;
+    this.formSubject.next(this.orderForm);
+    console.log('orddeerr', this.orderForm);
     this.addedProductsSubject.next(this.addedProducts);
     this.saveInLocalStorage(this.addedProducts);
     this.costs
@@ -97,15 +100,15 @@ export class CartService {
 
   calculateProductsCost() {
     let subtotal = 0;
-    this.addedProducts.forEach(product => subtotal += (product.selectedOptions.quantity * product.data.price));
+    this.addedProducts.forEach(product => subtotal += (product.selectedOptions.quantity * product.price));
     return subtotal;
   }
 
   addingManager(inputProduct) {
     if (this.addedProducts.length > 0 && this.checkIfProductIsAlreadyInBag(inputProduct)) {
       this.addedProducts.forEach(product => {
-        if (product.data.id === inputProduct.data.id && product.selectedOptions.size === inputProduct.selectedOptions.size) {
-          this.increaseQuantity(inputProduct);
+        if (product.id === inputProduct.id && product.selectedOptions.size === inputProduct.selectedOptions.size) {
+          this.increaseQuantity(product);
         }
       })
     }
@@ -124,19 +127,16 @@ export class CartService {
     this.update();
   }
 
-  increaseQuantity(inputProduct) {
-    let offer = inputProduct.data.offers.find(offer => offer.size === inputProduct.selectedOptions.size)
-    this.addedProducts.forEach(product => {
-      if (product.uniqueName === inputProduct.uniqueName && product.selectedOptions.quantity < offer.quantity) {
-        product.selectedOptions.quantity++
-      }
-    })
+  increaseQuantity(product) {
+    if (product.selectedOptions.quantity < product.availableQuantity) {
+      product.selectedOptions.quantity++
+    }
     this.update();
   }
 
 
   checkIfProductIsAlreadyInBag(inputProduct) {
-    return this.addedProducts.some(product => product.data.id === inputProduct.data.id && product.selectedOptions.size === inputProduct.selectedOptions.size)
+    return this.addedProducts.some(product => product.id === inputProduct.id && product.selectedOptions.size === inputProduct.selectedOptions.size)
   }
 
   saveInLocalStorage(product): void {

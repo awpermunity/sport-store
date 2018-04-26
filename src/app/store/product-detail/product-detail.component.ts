@@ -6,6 +6,7 @@ import { Product } from '../../model/product.model';
 import { Location } from '@angular/common';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 import { CartService } from '../services/cart.service';
+import { SelectedProduct } from '../../model/orderForm.model';
 
 
 @Component({
@@ -54,18 +55,31 @@ export class ProductDetailComponent {
     if (!this.selectedSize) {
       this.dropdownStatus = true;
       return;
-    }
+    };
     this.productAdded = true;
-    const selectedProduct = {
-      data: product,
-      selectedOptions: {
-        size: this.selectedSize,
-        quantity: 1
-      },
-      uniqueName: this.product.id + this.selectedSize
-    }
+    const selectedProduct = this.prepareSelectedProduct(product)
+
     this.cartService.addProduct(selectedProduct);
     setTimeout(() => this.productAdded = false, 3000);
+  }
+
+  prepareSelectedProduct(product) {
+    let offer = product.offers.find(offer => offer.size === this.selectedSize);
+    const availableQuantity = offer.quantity
+
+    const selectedProduct: SelectedProduct = {
+      id: product.id,
+      uniqueName: this.product.id + this.selectedSize,
+      name: product.name,
+      price: product.price,
+      availableQuantity: availableQuantity,
+      img: product.imgsPaths[0],
+      selectedOptions: {
+        size: this.selectedSize,
+        quantity: 1,
+      },
+    }
+    return selectedProduct;
   }
 
   setGalleryConfig() {
