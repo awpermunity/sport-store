@@ -21,8 +21,8 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.subscription = this.cartService.products$.subscribe(products => {
-      this.productsInBag = products;
+    this.subscription = this.cartService.orderForm$.subscribe(orderForm => {
+      this.productsInBag = orderForm.products;
     });
   }
 

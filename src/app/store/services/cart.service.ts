@@ -12,14 +12,9 @@ export class CartService {
 
   private key: string = 'store';
 
-  private addedProducts: Array<any> = this.getProductsFromLocalStorage();
-  private addedProductsSubject = new BehaviorSubject<any>(this.addedProducts);
-  public products$ = this.addedProductsSubject.asObservable();
-
-  private orderForm: any = {};
+  private orderForm = this.getOrderFormData();
   private formSubject = new BehaviorSubject<any>(this.orderForm);
   public orderForm$ = this.formSubject.asObservable();
-
 
   public costs = this.calculateCostsIfNeeded();
   public costsSubject = new BehaviorSubject<any>(this.costs);
@@ -37,6 +32,19 @@ export class CartService {
     this.update();
   }
 
+  getOrderFormData() {
+    let orderForm = {
+      products: [],
+    };
+    const storageData = this.checkDataInLocalStorage();
+    return storageData || orderForm
+  }
+
+  checkDataInLocalStorage() {
+    return this.storage.get(this.key);
+  }
+
+
   sendOrder(): Observable<any> {
     return this.http.post<any>(this.url + 'orders', this.orderForm);
   }
@@ -53,9 +61,9 @@ export class CartService {
   }
 
   addForm(formValue, formName) {
-    // this.orderForm[formName] = formValue
-    this.formSubject.next(this.orderForm)
-    console.log('FORRMM', this.orderForm);
+    this.orderForm[formName] = formValue;
+    this.formSubject.next(this.orderForm);
+    this.saveDataInLocalStorage(this.orderForm);
   }
 
   addProduct(product: any) {
@@ -72,11 +80,8 @@ export class CartService {
   }
 
   updateCart() {
-    this.orderForm.products = this.addedProducts;
     this.formSubject.next(this.orderForm);
-    console.log('orddeerr', this.orderForm);
-    this.addedProductsSubject.next(this.addedProducts);
-    this.saveInLocalStorage(this.addedProducts);
+    this.saveDataInLocalStorage(this.orderForm);
     this.costs
   }
 
@@ -100,26 +105,29 @@ export class CartService {
 
   calculateProductsCost() {
     let subtotal = 0;
-    this.addedProducts.forEach(product => subtotal += (product.selectedOptions.quantity * product.price));
+    if (this.orderForm.products) {
+      this.orderForm.products.forEach(product => subtotal += (product.selectedOptions.quantity * product.price));
+    }
     return subtotal;
   }
 
   addingManager(inputProduct) {
-    if (this.addedProducts.length > 0 && this.checkIfProductIsAlreadyInBag(inputProduct)) {
-      this.addedProducts.forEach(product => {
+    const products = this.orderForm.products;
+    if (products.length > 0 && this.checkIfProductIsAlreadyInBag(products, inputProduct)) {
+      products.forEach(product => {
         if (product.id === inputProduct.id && product.selectedOptions.size === inputProduct.selectedOptions.size) {
           this.increaseQuantity(product);
         }
       })
     }
     else {
-      this.addedProducts.push(inputProduct);
+      this.orderForm.products.push(inputProduct);
       this.update();
     }
   }
 
   reduceQuantity(inputProduct) {
-    this.addedProducts.forEach(product => {
+    this.orderForm.products.forEach(product => {
       if (product.uniqueName === inputProduct.uniqueName && product.selectedOptions.quantity > 1) {
         product.selectedOptions.quantity--
       }
@@ -135,27 +143,23 @@ export class CartService {
   }
 
 
-  checkIfProductIsAlreadyInBag(inputProduct) {
-    return this.addedProducts.some(product => product.id === inputProduct.id && product.selectedOptions.size === inputProduct.selectedOptions.size)
+  checkIfProductIsAlreadyInBag(products, inputProduct) {
+    return products.some(product => product.id === inputProduct.id && product.selectedOptions.size === inputProduct.selectedOptions.size)
   }
 
-  saveInLocalStorage(product): void {
-    this.storage.set(this.key, product);
+  saveDataInLocalStorage(orderForm): void {
+    this.storage.set(this.key, orderForm);
   }
 
-  getProductsFromLocalStorage() {
-    const storage = this.storage.get(this.key)
-    return storage || [];
-  }
   removeProduct(uniqueName: string) {
-    this.addedProducts = this.addedProducts.filter((product) => product.uniqueName !== uniqueName);
+    this.orderForm.products = this.orderForm.products.filter((product) => product.uniqueName !== uniqueName);
     this.update();
   }
 
   clearBag() {
-    this.addedProducts = [];
-    this.addedProductsSubject.next(this.addedProducts);
     this.storage.remove(this.key);
+    this.orderForm = this.getOrderFormData();
+    this.formSubject.next(this.orderForm);
   }
 
 }

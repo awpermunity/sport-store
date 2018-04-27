@@ -16,9 +16,9 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.subscription = this.cartService.products$.subscribe(products => {
+    this.subscription = this.cartService.orderForm$.subscribe(orderForm => {
       this.bagCount = 0;
-      products.forEach(product => this.bagCount += product.selectedOptions.quantity)
+      orderForm.products.forEach(product => this.bagCount += product.selectedOptions.quantity)
     });
   }
 

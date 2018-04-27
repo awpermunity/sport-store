@@ -25,7 +25,13 @@ export class AddressComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.buildOrderForm();
+    this.buildOrderForm()
+    this.subscription = this.cartService.orderForm$.subscribe(orderForm => {
+      console.log('ordder', orderForm);
+      if (orderForm.address) {
+        this.addressForm.setValue(orderForm.address);
+      }
+    })
     this.cartService.updateCosts();
   }
 

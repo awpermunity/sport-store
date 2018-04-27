@@ -22,9 +22,9 @@ export class OrderSummaryComponent implements OnInit {
   @Input() cartCost: string;
 
   ngOnInit() {
-    this.subscription = this.cartService.products$.subscribe(products => {
+    this.subscription = this.cartService.orderForm$.subscribe(orderForm => {
       this.bagCount = 0;
-      products.forEach(product => this.bagCount += product.selectedOptions.quantity);
+      orderForm.products.forEach(product => this.bagCount += product.selectedOptions.quantity);
     });
 
     this.subscription = this.cartService.costs$.subscribe(costs => {

@@ -27,26 +27,11 @@ export class OrderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.subscription = this.cartService.products$.subscribe(products => {
-      this.productsInBag = products;
-    });
   }
-
-  goToTheNextStep(event) {
-    console.log('eeeeeeeeeeeeeeeevent', event);
-  }
-
 
   goBack(): void {
     this.location.back();
   }
 
-  prepareOrder(form) {
-    const id = new Date().getTime();
-    const selectedProducts = this.productsInBag;
-    const totalPrice = this.totalPrice;
-    const order: Order = { id, selectedProducts, form, totalPrice }
-    return order
-  }
 }
 

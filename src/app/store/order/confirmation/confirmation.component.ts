@@ -11,8 +11,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./confirmation.component.less']
 })
 export class ConfirmationComponent implements OnInit {
+  private productsFromBackend: Array<Product>;
   private subscription: Subscription;
-  private productsInBag: any[] = [];
+  private selectedProducts: any[] = [];
   private order: any;
 
 
@@ -24,11 +25,10 @@ export class ConfirmationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.subscription = this.cartService.products$.subscribe(products => {
-      this.productsInBag = products;
-    })
+    this.subscription = this.storeService.getProducts().subscribe(products => this.productsFromBackend = products);
     this.subscription = this.cartService.orderForm$.subscribe(orderForm => {
       this.order = orderForm;
+      this.selectedProducts = orderForm.products;
     })
 
   }
@@ -48,8 +48,8 @@ export class ConfirmationComponent implements OnInit {
   }
 
   checkIfSpacerIsNeeded(product: Product) {
-    const count = this.productsInBag.length;
-    if (count > 0 && this.productsInBag.indexOf(product) !== (count - 1)) {
+    const count = this.selectedProducts.length;
+    if (count > 0 && this.selectedProducts.indexOf(product) !== (count - 1)) {
       return 'item border-bottom';
     }
     return 'item';
@@ -64,13 +64,28 @@ export class ConfirmationComponent implements OnInit {
   }
 
   updateProducts() {
-    this.order.products.forEach(
-      product => {
-        let offer = product.data.offers.find(offer => offer.size === product.selectedOptions.size)
-        offer.quantity -= product.selectedOptions.quantity
-      })
-    this.order.products.forEach(product =>
-      this.storeService.updateProduct(product.data).subscribe());
+    this.order.products.forEach(selectedProduct => {
+      const updatingProduct = this.productsFromBackend.find(product => product.id === selectedProduct.id)
+      let updatingProductOffer = updatingProduct.offers.find(offer => offer.size === selectedProduct.selectedOptions.size)
+      updatingProductOffer.quantity -= selectedProduct.selectedOptions.quantity;
+      console.log('updatingProductOffer', updatingProduct)
+      this.storeService.updateProduct(updatingProduct).subscribe();
+      // console.log('findddddd', find)
+    })
   }
+
+
+
+
+
+
+  //   this.order.products.forEach(
+  //     product => {
+  //       let offer = product.data.offers.find(offer => offer.size === product.selectedOptions.size)
+  //       offer.quantity -= product.selectedOptions.quantity
+  //     })
+  //   this.order.products.forEach(product =>
+  //     this.storeService.updateProduct(product.data).subscribe());
+  // }
 
 }

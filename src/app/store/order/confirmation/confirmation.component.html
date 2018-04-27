@@ -3,18 +3,18 @@
     Check in and checkout
   </h2>
 
-  <div [ngClass]="checkIfSpacerIsNeeded(product)" *ngFor="let product of productsInBag">
+  <div [ngClass]="checkIfSpacerIsNeeded(product)" *ngFor="let product of selectedProducts">
     <div class="item-image" (click)="goToDetails(product)">
-      <img src="../../../../assets/img/products/{{product.data.id}}.jpg ">
+      <img src="../../../../assets/img/products/{{product.id}}.jpg ">
     </div>
     <div class="item-info">
       <div class="product-description">
         <div>
-          {{product.data.name}}
+          {{product.name}}
         </div>
-        <div class="product-details" *ngFor="let type of objectKeys(product.data.details)">
+        <div class="product-details" *ngFor="let type of objectKeys(product.details)">
           <div class="detail">
-            {{type}} : {{product.data.details[type]}}
+            {{type}} : {{product.details[type]}}
           </div>
         </div>
         <div>
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="product-price">
-        <h5>{{product.data.price}}$</h5>
+        <h5>{{product.price}}$</h5>
       </div>
     </div>
   </div>
